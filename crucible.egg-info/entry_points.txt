@@ -1,0 +1,3 @@
+[console_scripts]
+crucible = crucible.cli:main
+crucible-ui = crucible.ui.__main__:main

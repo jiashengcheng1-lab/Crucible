@@ -1,0 +1,1 @@
+{"ts": "2026-09-22T22:37:43+00:00", "analyst": "demo", "company": "SYNTH", "assumption": "revenue_growth_3y", "packet_hash": "69a8812d9678", "tool_low": 0.1538, "tool_base": 0.1688, "tool_high": 0.1786, "action": "edit", "analyst_value": 0.14, "reason": "demo: haircut for backlog conversion risk"}

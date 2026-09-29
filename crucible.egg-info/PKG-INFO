@@ -1,0 +1,260 @@
+Metadata-Version: 2.4
+Name: crucible
+Version: 0.11.0
+Summary: Equity research MVP: filings -> maintained model -> adversarially stress-tested assumptions with evidence attribution
+License: MIT
+Project-URL: Homepage, https://github.com/jiashengcheng1-lab/crucible
+Project-URL: Issues, https://github.com/jiashengcheng1-lab/crucible/issues
+Keywords: equity research,SEC filings,XBRL,financial model,DCF,LLM
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Office/Business :: Financial :: Investment
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: edgartools>=5.50
+Requires-Dist: pandas>=2.0
+Requires-Dist: numpy>=1.24
+Requires-Dist: openpyxl>=3.1
+Requires-Dist: pydantic>=2.0
+Requires-Dist: pyarrow>=14
+Provides-Extra: anthropic
+Requires-Dist: anthropic>=1.0; extra == "anthropic"
+Provides-Extra: openai
+Requires-Dist: openai>=1.40; extra == "openai"
+Provides-Extra: market
+Requires-Dist: yfinance>=0.2; extra == "market"
+Provides-Extra: ui
+Requires-Dist: streamlit>=1.40; extra == "ui"
+Provides-Extra: dev
+Requires-Dist: pytest>=7; extra == "dev"
+Provides-Extra: all
+Requires-Dist: anthropic>=1.0; extra == "all"
+Requires-Dist: yfinance>=0.2; extra == "all"
+Requires-Dist: streamlit>=1.40; extra == "all"
+Requires-Dist: pytest>=7; extra == "all"
+Dynamic: license-file
+
+# crucible
+
+**Filings in, a maintained financial model out. Every number traceable to a filing sentence, every judgment recorded, every model output measured against what happened.**
+
+crucible is an open source research workbench for fundamental equity analysts. It pulls a company's SEC filings, builds a three-statement model and DCF from the XBRL facts (no model-generated numbers), lets a language model propose the things an analyst would otherwise do by hand (line mappings, the segment scheme, the KPI set, the peer set, pricing power, where the cycle is, incentives, normalization, forecasting methods, valuation method, scenarios) and records the analyst's decision on each proposal with its evidence, citation and open questions. Forecast assumptions can be debated by opposing advocates over a frozen evidence packet, and the debates are backtested against realized outcomes, including a control arm that shows when the debate beats a plain vote and when it does not.
+
+It runs from the terminal, from Excel (export a review workbook, decide offline, import it back) or from a Streamlit UI.
+
+## What it does
+
+| Layer | What happens | Where it lives |
+|---|---|---|
+| Ingest | 10-K, 10-Q, 8-K earnings releases, proxy statement, full-filing XBRL (custom concepts and segment members), point-in-time facts | `crucible/ingest.py` |
+| Map | Exact us-gaap concepts first, labels second, residual lines so totals tie; the model proposes mappings for what is left, with a filing citation the model confirms; the analyst accepts, rejects, retargets or marks unsure; accepted links are components that never override a reported total | `mapping.py`, `facts.py`, `mapsuggest.py`, `ledger.py` |
+| Profile | Industry from the filing header (SIC code and description); business model, drivers, KPIs, unit economics and template candidates read from Item 1 and the releases with verified quotes | `profile.py` |
+| Decide | Fifteen modeling decisions, each debated by option advocates with verified quotes and judged with confidence, reasoning, citations, settling questions and considerations; two options debate directly, more run a pairwise tournament | `decisions.py`, `dossier.py` |
+| Model | Driver-based three statements and DCF in Excel with formulas; scenarios with a selector cell, per-driver elasticity, working capital by days or ratios, diluted shares by the treasury stock method, an optional audit sheet listing every check formula; industry driver templates (bitcoin miner: hashrate x network share x price) run the model on operating drivers | `model.py`, `excel.py`, `templates.py` |
+| Inputs | Risk-free rate as a FRED series, expected market return by method against the same-date rate, weekly betas, cost of debt, market debt weights, ERP kept as a dated series | `inputs.py`, `marketdata.py` |
+| Debate | Bull and bear advocates, verified-quote gate, judge with crux and questions; stability, permutation, leave-one-out and attribution harness; single-analyst control arm; backtests with calibration | `debate.py`, `harness.py`, `attribution.py` |
+| Review | Terminal loop with follow-up questions answered from the filings with citations and confidence; review workbook export and import; brief (what it does, why now, what the debate is) cited to the filings | `decisions.py`, `ask.py`, `brief.py` |
+| UI | Streamlit app over the whole process | `crucible/ui/` |
+
+## Install
+
+```bash
+git clone https://github.com/jiashengcheng1-lab/crucible && cd crucible
+python -m venv .venv && source .venv/bin/activate
+pip install -e ".[all]"                  # anthropic client, yfinance, streamlit, pytest
+cp .env.example .env                     # ANTHROPIC_API_KEY, EDGAR_IDENTITY (SEC requires a contact), FRED_API_KEY
+python -m pytest -q                      # 49 tests, all offline
+python -m crucible demo                  # the whole loop on a synthetic company with the mock model
+```
+
+Python 3.10 or newer. Without an API key everything runs with `--provider mock` (placeholder answers, real arithmetic).
+
+## Quick start on a real company
+
+```bash
+export EDGAR_IDENTITY="Your Name your@email"
+export ANTHROPIC_API_KEY=sk-ant-...
+
+python -m crucible ingest AAPL --years 7
+python -m crucible map-suggest AAPL --provider anthropic --runs 2     # proposals with model-confirmed citations
+python -m crucible review AAPL --what mapping --provider anthropic    # a / r / u / t<target> / n<note> / ?question / s / q
+python -m crucible profile AAPL --provider anthropic                  # industry from the filing header; drivers and KPIs from the documents
+python -m crucible choose AAPL --provider anthropic --cheap           # the fifteen modeling decisions
+python -m crucible review AAPL --what decisions --provider anthropic
+python -m crucible brief AAPL --provider anthropic
+python -m crucible inputs AAPL                                        # rf, beta, ERP (30-year method by default), cost of debt, shares
+python -m crucible model AAPL --audit-links                           # outputs/AAPL_model.xlsx
+python -m crucible export AAPL                                        # final workbook (ledgers + brief) and the unsure workbook
+```
+
+Offline review: `python -m crucible review-export AAPL` writes one workbook with every pending proposal and decision and all their fields (proposed target, confidence, alternatives, evidence, what the target is currently mapped from, reasoning, citation, questions, considerations). Fill DECISION, TARGET_OVERRIDE, NOTE and FOLLOW_UP_QUESTION, then `python -m crucible review-import AAPL outputs/AAPL_review.xlsx --provider anthropic`; follow-up questions are answered with citations and a confidence and written into the ledger notes.
+
+Questions at any time: `python -m crucible ask AAPL "what drives services gross margin?" --provider anthropic`.
+
+## The UI
+
+```bash
+crucible-ui            # or: streamlit run crucible/ui/app.py
+```
+
+Run each step, review proposals and decisions row by row (accept, reject, unsure, retarget, note, ask the filings), read the brief and profile, build and download the model, run driver debates, browse the question log. The UI writes the same ledgers the CLI does.
+
+## Design rules
+
+- The model never generates a number that enters the statements. Numbers come from XBRL facts and from explicit driver inputs.
+- Evidence packets are frozen and hashed; every advocate claim carries a verbatim quote that must string-match a cited item, or it is deleted.
+- The analyst's decision is the record. Reruns never overwrite a decided row unless asked (`--reset`); accepted links are components of a reported total, never overrides of it.
+- Every step is measurable: agreement across runs, citation confirmation rate, tie-out checks, backtest calibration, debate versus vote.
+
+## Status and limits
+
+Built and tested on Vertiv, Powell, MARA, Riot, CleanSpark, Cipher, Apple and Microsoft. Known limits: production is non-cash until sold in the miner template; organic versus acquired growth is not split; multiples, sum-of-the-parts and reverse DCF sheets are not built; roll-forward of an existing model to the next quarter is not built. See `docs/ROADMAP.md`.
+
+## Reference: commands and the debate harness
+
+## Run order for a real company
+
+```bash
+export EDGAR_IDENTITY="Your Name your@email"           # SEC requires a contact in the User-Agent
+python -m crucible ingest VRT --peers ETN NVT MOD      # writes data/VRT, data/ETN, ... and prints the mapping report
+python -m crucible model VRT                           # outputs/VRT_model.xlsx  (+ checks and DCF summary on stdout)
+python -m crucible packet VRT --assumption revenue_growth_3y --peers ETN NVT MOD --analyst analyst_inputs.example.json
+python -m crucible debate VRT --assumption revenue_growth_3y --provider anthropic --seed 1      # prints crux first; writes outputs/VRT_..._review.md
+python -m crucible harness VRT --assumption revenue_growth_3y --provider anthropic --runs 3 --loo-k 2 --workers 4
+# heterogeneity: different model families per side
+python -m crucible debate VRT --assumption revenue_growth_3y --provider anthropic --bear-model openai:gpt-5
+python -m crucible decide VRT --assumption revenue_growth_3y --action edit --value 0.12 --reason "backlog conversion slower than guide"
+```
+
+Backtests (packet built only from filings dated on or before the as-of date; debate and vote arms scored against what the company then reported, partial horizons included):
+
+```bash
+python -m crucible dates VRT                                                              # filings on disk, scoreable as-of dates
+python -m crucible backtest VRT --assumption revenue_growth_3y --sweep 4 --peers ETN NVT MOD POWL --provider anthropic --runs 3 --vote-n 5
+python -m crucible backtest VRT --assumption revenue_growth_3y --as-of 2023-02-27 --peers ETN NVT MOD POWL --provider anthropic --runs 3
+```
+
+Harness runs are concurrent (`--workers`, default 4) and cached under `logs/cache/`, so an interrupted run resumes where it stopped; `--no-cache` forces fresh debates. `CRUCIBLE_DEBUG=1` saves every raw model response under `logs/raw/`.
+
+`CRUCIBLE_PROVIDER=mock` runs everything without an API key (deterministic stand-in, useful for plumbing checks). Set `CRUCIBLE_MODEL` to the model id you want when using `anthropic` or `openai`.
+
+## Steps 1-5: decisions, review, export (v0.9)
+
+Every "which scheme / which method / where are we" question runs through the same layer:
+
+```bash
+python -m crucible ingest MARA --years 7                                  # now also segment facts and the proxy statement
+python -m crucible map-suggest MARA --provider anthropic --runs 2
+python -m crucible review MARA --what mapping                              # a / r / u / t<target> / n<note> / s / q
+python -m crucible choose MARA --provider anthropic                        # 15 decisions, advocates + judge per pairing (~100 calls)
+python -m crucible choose MARA --provider anthropic --cheap                # same decisions, judge ranks directly (~15 calls)
+python -m crucible choose MARA --provider anthropic --keys peer_set pricing_power market_cycle
+python -m crucible review MARA --what decisions                            # accept / reject / unsure, with notes
+python -m crucible brief MARA --provider anthropic                         # what it does / why now / the debate, cited
+python -m crucible export MARA                                             # MARA_final.xlsx (mapping_ledger, decision_ledger, brief) + MARA_final_unsure.xlsx
+python -m crucible set-peers MARA RIOT CLSK CIFR && python -m crucible ingest MARA --peers RIOT CLSK CIFR
+python -m crucible inputs MARA --erp-method hist10y                       # ERP from the series; diluted shares by TSM
+python -m crucible model MARA --nwc-method days --audit-links             # scenarios, elasticity, selector cell, audit sheet
+python -m crucible quarterly MARA
+```
+
+Decisions run: segment_scheme, unit_economics, kpi_scheme, peer_set, pricing_power, market_cycle (pairwise tournament over expansion / peak / contraction / trough with FRED features), management_alignment (proxy metrics + five-year allocation record), normalization_policy, revenue_method, cost_method, capex_method, industry_template, valuation_method, dcf_method, scenarios. Each option is a ledger row: statement = decision, source = option, target = value, confidence, alternatives, relation = the judge's reasoning, citation = verbatim filing text, questions = what settles it, duplicates = considerations and conflicts. The dossier (`python -m crucible dossier MARA`) shows exactly what the advocates and the judge could cite.
+
+Token discipline: one dossier per company, one round per pairing, results cached by packet hash under `logs/cache/`, `--cheap` for one-call rankings, `--keys` to rerun one decision, `--reset` to replace decisions already made after the evidence changed.
+
+Accepted links are components. The schema total (CostOfRevenue, NetCashProvidedByUsedInInvestingActivities) wins wherever it has a value; a linked line fills the years the total lacks and several linked lines are summed there; where both exist the tool reports the difference. To override a wrong schema total, reject its rule row in `review`. This is why accepting "energy costs -> cogs" is safe: it completes FY2025 for MARA without touching FY2021-2024.
+
+## Industry driver templates (v0.10)
+
+The trailing-average drivers are a starting point; a template makes the model run on the operating drivers the business actually has. The bitcoin miner:
+
+```bash
+python -m crucible kpis MARA --cites                                   # hashrate, blocks won, BTC produced, cost per BTC, prices, holdings, each with its release sentence
+python -m crucible debate MARA --assumption hashrate_growth_3y --provider anthropic
+python -m crucible debate MARA --assumption network_hashrate_growth_3y --provider anthropic
+python -m crucible debate MARA --assumption btc_price_change_3y --provider anthropic
+python -m crucible model MARA --template auto                          # auto = the accepted industry_template decision; verdicts on disk replace the default driver paths
+python -m crucible model MARA --template bitcoin_miner --template-inputs my_paths.json   # {"btc_price": [90000, 100000, 80000, 110000, 120000], "hashrate_eh": 80}
+```
+
+The Drivers sheet carries the paths in blue and the build as formulas (BTC mined = own / network hashrate x issuance x (1 + fees); energy MWh = EH/s x J/TH x 8760; capex = new hashrate plus the retiring fleet x $m per EH/s; depreciation over the fleet life); the model's growth, margin, D&A and capex inputs link to it and the treasury enters the equity bridge. What the template does not do: the mined-coin cash timing (production is non-cash until sold) and the AI/HPC pivot are still analyst inputs.
+
+## Evidence sources (v0.3)
+
+- 10-K facts and statements (history), 10-K Items 1 / 1A / 7 (text), per fiscal year so as-of packets use period text.
+- 8-K earnings releases (Item 2.02, EX-99.1): guidance, orders, backlog, book-to-bill. Full-year guides are parsed from sentences and from guidance tables (two-column quarter/full-year layouts included) into direct items, plus a guidance track record: each realized year's initial guide vs the growth the company then reported, so the judge can see whether management sandbags. This is where the forward-looking numbers live; without it the judge falls back on peer base rates.
+- Analyst inputs JSON (risk-free, ERP, beta, notes). Notes are treated as evidence, so placeholders move the verdict: keep the file clean.
+
+## Mapping ledger: rules propose, the model proposes, the analyst decides
+
+Mapping rules live in `crucible/rules/schema_rules.csv` (editable, no Python). Every link a company ends up with is recorded in
+`data/mapping_ledger.csv` with its confidence, the alternatives that also matched, the evidence seen and who decided.
+
+```bash
+python -m crucible map-status MARA                      # records rule matches, shows the ledger
+python -m crucible map-suggest MARA --provider anthropic # LLM proposals for unmapped lines above 1% materiality -> pending
+python -m crucible map-export MARA                      # Excel with dropdowns; edit target/status/note
+python -m crucible map-import MARA outputs/MARA_mapping_ledger.xlsx
+python -m crucible map-approve MARA --source "Cost, Depreciation and Amortization" --statement IS --target residual --note "D&A, not cash cost"
+```
+
+Accepted rows override rules on every later run; rejected rows are never used again; the model was called once. Full-filing
+XBRL facts (`ingest` v0.7+) expose company extension tags so custom concepts can be linked the same way. See docs/ROADMAP.md.
+
+## Attribution by regression
+
+`harness --ablation random --random-k 16` runs random evidence subsets and fits OLS of the base on group inclusion (effects with
+bootstrap intervals and R²). `attribution-fit` fits on the logged runs with no API calls, plus a logistic fit of hit-or-miss on
+backtest runs.
+
+## Analyst inputs (cost of capital) are derived, dated and cited
+
+```bash
+export FRED_API_KEY=...                      # free key: https://fredaccount.stlouisfed.org/apikey (keep it in .env)
+pip install -e ".[market]"                   # yfinance
+python -m crucible inputs VRT --peers ETN NVT MOD POWL
+```
+
+`data/VRT/analyst_inputs.json` then holds, per field, the value, the citation and the date: risk-free from FRED DGS10 (latest observation on or before the as-of date), beta from an OLS of two years of weekly returns on the S&P 500 (Yahoo Finance; r2, window and the Blume-adjusted beta recorded), peer betas the same way, cost of debt and the effective tax rate from the 10-K facts, debt weight at market value (cover-page shares from the filings x Yahoo price; book weight kept alongside), and the equity risk premium from Damodaran's implied-ERP table when reachable. The ERP is the one input no filing contains: it is a market-wide expected return over the risk-free rate, so it is either Damodaran's published estimate or a house view, and `--erp 0.046 --erp-source '...'` records yours.
+
+The file is reused within seven days (`--refresh` rebuilds). Analysts override any field with a reason (`--set beta=1.25 --reason 'bottom-up peer beta'`) and add notes (`--note '...'`); overrides and notes enter the evidence packet labeled as such. The WACC packet and the Excel model both read this file.
+
+## Known limits (v0.3)
+
+- The SEC companyfacts feed omits company-specific extension concepts. That is why the miners map badly: MARA's FY2025 cost of revenue and its digital-asset holdings live in `mara:` concepts. v0.3 adds a pull of the latest 10-K's full XBRL and concept overrides for them.
+- Short-term investments and digital assets are not treated as cash in net debt yet.
+- The Excel parity test needs LibreOffice; it skips elsewhere.
+
+## What to send back after the first ingest
+
+`data/<TICKER>/mapping_report.txt` for the target and each peer. Unmapped labels and large residuals are what get fixed next, either by adding matchers in `crucible/schema.py` or by an explicit `data/<TICKER>/mapping_overrides.json`:
+
+```json
+{"IS": {"Amortization of intangibles": "other_opex"}, "BS": {"Operating lease right-of-use assets": "other_noncurrent_assets"}}
+```
+
+## Layout
+
+```
+crucible/schema.py     standard line items + concept/label matchers
+crucible/mapping.py    edgartools frames -> standardized history with residuals
+crucible/model.py      Drivers, forecast(), dcf(), sensitivity(), checks()
+crucible/excel.py      formula-driven workbook (Inputs, Model, DCF, Sources)
+crucible/ingest.py     edgartools pulls: statements, point-in-time facts, 10-K text, provenance
+crucible/evidence.py   EvidencePacket + deterministic builders
+crucible/debate.py     bull/bear/judge protocol, citation validator
+crucible/harness.py    stability, permutation, leave-one-out attribution
+crucible/log.py        runs.jsonl, decisions.jsonl, outcomes.jsonl
+crucible/peers.py      competitor extraction from the 10-K competition section
+crucible/cli.py        commands above
+docs/PRODUCT.md        product framing for the case presentation
+```
+
+## Design rules
+
+- The LLM maps and argues; deterministic code computes. Every number in the model carries a filing source.
+- Evidence packets are frozen and hashed; agents can only cite ids, never add facts.
+- Robustness is measured, not assumed: seed stability, order permutation, ablation, and later point-in-time backtests against realized outcomes.
+- Public SEC data only. Provenance on every number. Analyst decisions are the proprietary dataset.
