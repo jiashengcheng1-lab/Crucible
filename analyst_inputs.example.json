@@ -1,0 +1,17 @@
+{
+  "_comment": "LEGACY flat template. Preferred flow: `crucible inputs VRT --peers ETN NVT MOD POWL` derives every field below from FRED, Yahoo Finance and the filings with citations into data/VRT/analyst_inputs.json, which the packet and model use automatically. Use this file only when you want to hand-type values (pass --analyst analyst_inputs.example.json); every value here is a placeholder.",
+  "risk_free": 0.042,
+  "risk_free_source": "PLACEHOLDER: FRED DGS10 observation <date>",
+  "erp": 0.05,
+  "erp_source": "PLACEHOLDER: Damodaran implied ERP <date> or house view",
+  "beta": 1.3,
+  "beta_source": "PLACEHOLDER: 2-year weekly OLS vs S&P 500 as of <date>",
+  "peer_betas": {},
+  "debt_weight": 0.15,
+  "debt_weight_source": "PLACEHOLDER: book debt / (book debt + market cap) as of <date>",
+  "cost_of_debt": 0.05,
+  "cost_of_debt_source": "PLACEHOLDER: interest expense / average debt, 10-K FY<year>",
+  "tax_rate": 0.22,
+  "tax_rate_source": "PLACEHOLDER: 3-year effective rate, 10-K",
+  "notes": []
+}
