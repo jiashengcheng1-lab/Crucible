@@ -1,0 +1,94 @@
+ticker,statement,source_type,source,target,confidence,alternatives,status,proposed_by,evidence,relation,citation,questions,duplicates,decided_by,decided_at,note,version
+AAPL,IS,label,Total Revenue,revenue,0.85,[],accepted,rule:label,FY 2025: 416161000000.0,,,,,,,,1
+AAPL,IS,label,Cost of Revenue,cogs,0.85,[],accepted,rule:label,FY 2025: 220960000000.0,,,,,,,,1
+AAPL,IS,label,Gross Profit,gross_profit,0.85,[],accepted,rule:label,FY 2025: 195201000000.0,,,,,,,,1
+AAPL,IS,label,Research and Development Expense,rnd,0.85,[],accepted,rule:label,FY 2025: 34550000000.0,,,,,,,,1
+AAPL,IS,label,General and Administrative Expense,sga,0.85,[],accepted,rule:label,FY 2025: 8077000000.0,,,,,,,,1
+AAPL,IS,label,"Selling, General and Administrative Expense",sga,0.85,[],accepted,rule:label,FY 2025: 27601000000.0,,,,,,,,1
+AAPL,IS,label,Operating Income (Loss),operating_income,0.85,[],accepted,rule:label,FY 2025: 133050000000.0,,,,,,,,1
+AAPL,IS,label,Other Nonoperating Income (Expense),other_nonoperating,0.85,[],accepted,rule:label,FY 2025: ,,,,,,,,1
+AAPL,IS,label,"Income (Loss) from Continuing Operations before Income Taxes, Noncontrolling Interest",pretax_income,0.85,[],accepted,rule:label,FY 2025: 132729000000.0,,,,,,,,1
+AAPL,IS,label,Income Tax Expense (Benefit),income_tax,0.85,[],accepted,rule:label,FY 2025: 20719000000.0,,,,,,,,1
+AAPL,IS,label,Net Income (Loss) Attributable to Parent,net_income,0.85,[],accepted,rule:label,FY 2025: 112010000000.0,,,,,,,,1
+AAPL,IS,label,"Earnings Per Share, Diluted",eps_diluted,0.85,[],accepted,rule:label,FY 2025: 7.46,,,,,,,,1
+AAPL,IS,label,Nonoperating Income (Expense),nonoperating_total,0.85,[],accepted,rule:label,FY 2025: -321000000.0,,,,,,,,1
+AAPL,IS,label,"Weighted Average Number of Shares Outstanding, Diluted",shares_diluted,0.85,[],accepted,rule:label,FY 2025: 15004697000.0,,,,,,,,1
+AAPL,IS,label,Interest Expense,interest_expense,0.85,[],accepted,rule:label,FY 2025: ,,,,,,,,1
+AAPL,IS,label,"Interest Expense, Debt",interest_expense,0.60,[],accepted,rule:label,FY 2025: ,,,,,,,,1
+AAPL,BS,label,Assets,total_assets,0.85,[],accepted,rule:label,FY 2025: 359241000000.0,,,,,,,,1
+AAPL,BS,label,"Property, Plant and Equipment, Net",ppe_net,0.85,[],accepted,rule:label,FY 2025: 49834000000.0,,,,,,,,1
+AAPL,BS,label,"Cash and Cash Equivalents, at Carrying Value",cash,0.85,[],accepted,rule:label,FY 2025: 35934000000.0,,,,,,,,1
+AAPL,BS,label,"Accounts Receivable, after Allowance for Credit Loss, Current",receivables,0.85,[],accepted,rule:label,FY 2025: 39777000000.0,,,,,,,,1
+AAPL,BS,label,"Inventory, Net",inventory,0.85,[],accepted,rule:label,FY 2025: 5718000000.0,,,,,,,,1
+AAPL,BS,label,"Assets, Current",total_current_assets,0.85,[],accepted,rule:label,FY 2025: 147957000000.0,,,,,,,,1
+AAPL,BS,label,Liabilities,total_liabilities,0.85,[],accepted,rule:label,FY 2025: 285508000000.0,,,,,,,,1
+AAPL,BS,label,Stockholders' Equity Attributable to Parent,total_equity,0.85,[],accepted,rule:label,FY 2025: 73733000000.0,,,,,,,,1
+AAPL,BS,label,Liabilities and Equity,total_liabilities_and_equity,0.85,[],accepted,rule:label,FY 2025: 359241000000.0,,,,,,,,1
+AAPL,BS,label,"Liabilities, Current",total_current_liabilities,0.85,[],accepted,rule:label,FY 2025: 165631000000.0,,,,,,,,1
+AAPL,BS,label,"Accounts Payable, Current",payables,0.85,[],accepted,rule:label,FY 2025: 69860000000.0,,,,,,,,1
+AAPL,BS,label,"Long-term Debt, Current Maturities",short_term_debt,0.85,[],accepted,rule:label,FY 2025: 12350000000.0,,,,,,,,1
+AAPL,CF,label,"Depreciation, Depletion and Amortization",d_and_a,0.85,[],accepted,rule:label,FY 2025: 11698000000.0,,,,,,,,1
+AAPL,CF,label,"Share-based Payment Arrangement, Noncash Expense",sbc,0.85,[],accepted,rule:label,FY 2025: 12863000000.0,,,,,,,,1
+AAPL,CF,label,Net Cash Provided by (Used in) Operating Activities,cfo,0.85,[],accepted,rule:label,FY 2025: 111482000000.0,,,,,,,,1
+AAPL,CF,label,Net Cash Provided by (Used in) Investing Activities,cfi,0.85,[],accepted,rule:label,FY 2025: 15195000000.0,,,,,,,,1
+AAPL,CF,label,"Payments to Acquire Property, Plant, and Equipment",capex,0.85,[],accepted,rule:label,FY 2025: 12715000000.0,,,,,,,,1
+AAPL,CF,label,Payments for Repurchase of Common Stock,buybacks,0.85,[],accepted,rule:label,FY 2025: 90711000000.0,,,,,,,,1
+AAPL,CF,label,Net Cash Provided by (Used in) Financing Activities,cff,0.85,[],accepted,rule:label,FY 2025: -120686000000.0,,,,,,,,1
+AAPL,CF,label,Dividends paid,dividends,0.85,[],accepted,rule:label,FY 2025: 15421000000.0,,,,,,,,1
+AAPL,CF,label,"Cash, Cash Equivalents, Restricted Cash and Restricted Cash Equivalents, Period Increase (Decrease), Including Exchange Rate Effect",net_change_cash,0.85,[],accepted,rule:label,FY 2025: 5991000000.0,,,,,,,,1
+AAPL,CF,label,"Purchases of property and equipment, accrued but unpaid",capex,0.60,[],accepted,rule:label,FY 2025: 12715000000.0,,,,,,,,1
+AAPL,CF,label,"Share-based Payment Arrangement, Expense",sbc,0.85,[],accepted,rule:label,FY 2025: 12863000000.0,,,,,,,,1
+AAPL,CF,label,Depreciation,d_and_a,0.60,[],accepted,rule:label,FY 2025: 8000000000.0,,,,,,,,1
+AAPL,CF,label,Net Income (Loss) Attributable to Parent,cf_net_income,0.85,[],accepted,rule:label,FY 2025: 112010000000.0,,,,,,,,1
+AAPL,IS,concept,us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax,revenue,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,IS,concept,us-gaap:Revenues,revenue,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,IS,concept,us-gaap:SalesRevenueNet,revenue,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,IS,concept,us-gaap:CostOfGoodsAndServicesSold,cogs,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,IS,concept,us-gaap:GrossProfit,gross_profit,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,IS,concept,us-gaap:SellingGeneralAndAdministrativeExpense,sga,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,IS,concept,us-gaap:ResearchAndDevelopmentExpense,rnd,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,IS,concept,us-gaap:OperatingIncomeLoss,operating_income,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,IS,concept,us-gaap:InterestExpense,interest_expense,0.95,[],accepted,rule:concept,FY2023 accession 0000320193-23-000106,,,,,,,,1
+AAPL,IS,concept,us-gaap:OtherNonoperatingIncomeExpense,other_nonoperating,0.95,[],accepted,rule:concept,FY2023 accession 0000320193-23-000106,,,,,,,,1
+AAPL,IS,concept,us-gaap:NonoperatingIncomeExpense,nonoperating_total,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,IS,concept,us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest,pretax_income,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,IS,concept,us-gaap:IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments,pretax_income,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,IS,concept,us-gaap:IncomeTaxExpenseBenefit,income_tax,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,IS,concept,us-gaap:NetIncomeLoss,net_income,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,IS,concept,us-gaap:WeightedAverageNumberOfDilutedSharesOutstanding,shares_diluted,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,IS,concept,us-gaap:EarningsPerShareDiluted,eps_diluted,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,BS,concept,us-gaap:CashAndCashEquivalentsAtCarryingValue,cash,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-26-000020,,,,,,,,1
+AAPL,BS,concept,us-gaap:AvailableForSaleSecuritiesDebtSecuritiesCurrent,short_term_investments,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-26-000020,,,,,,,,1
+AAPL,BS,concept,us-gaap:MarketableSecuritiesCurrent,short_term_investments,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-26-000020,,,,,,,,1
+AAPL,BS,concept,us-gaap:AccountsReceivableNetCurrent,receivables,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-26-000020,,,,,,,,1
+AAPL,BS,concept,us-gaap:InventoryNet,inventory,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-26-000020,,,,,,,,1
+AAPL,BS,concept,us-gaap:AssetsCurrent,total_current_assets,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-26-000020,,,,,,,,1
+AAPL,BS,concept,us-gaap:PropertyPlantAndEquipmentNet,ppe_net,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-26-000020,,,,,,,,1
+AAPL,BS,concept,us-gaap:Goodwill,goodwill,0.95,[],accepted,rule:concept,FY2017 accession 0000320193-18-000007,,,,,,,,1
+AAPL,BS,concept,us-gaap:IntangibleAssetsNetExcludingGoodwill,intangibles,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-26-000020,,,,,,,,1
+AAPL,BS,concept,us-gaap:Assets,total_assets,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-26-000020,,,,,,,,1
+AAPL,BS,concept,us-gaap:AccountsPayableCurrent,payables,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-26-000020,,,,,,,,1
+AAPL,BS,concept,us-gaap:CommercialPaper,short_term_debt,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-26-000020,,,,,,,,1
+AAPL,BS,concept,us-gaap:CommercialPaper+LongTermDebtCurrent,short_term_debt,0.70,[],accepted,rule:sum,FY2025 accession 0000320193-26-000020,,,,,,,,1
+AAPL,BS,concept,us-gaap:LiabilitiesCurrent,total_current_liabilities,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-26-000020,,,,,,,,1
+AAPL,BS,concept,us-gaap:LongTermDebtNoncurrent,long_term_debt,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-26-000020,,,,,,,,1
+AAPL,BS,concept,us-gaap:Liabilities,total_liabilities,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-26-000020,,,,,,,,1
+AAPL,BS,concept,us-gaap:StockholdersEquity,total_equity,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-26-000020,,,,,,,,1
+AAPL,BS,concept,us-gaap:LiabilitiesAndStockholdersEquity,total_liabilities_and_equity,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-26-000020,,,,,,,,1
+AAPL,CF,concept,us-gaap:NetIncomeLoss,cf_net_income,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,CF,concept,us-gaap:DepreciationAndAmortization,d_and_a,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,CF,concept,us-gaap:DepreciationDepletionAndAmortization,d_and_a,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,CF,concept,us-gaap:ShareBasedCompensation,sbc,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,CF,concept,us-gaap:NetCashProvidedByUsedInOperatingActivities,cfo,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,CF,concept,us-gaap:NetCashProvidedByUsedInOperatingActivitiesContinuingOperations,cfo,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,CF,concept,us-gaap:PaymentsToAcquireProductiveAssets,capex,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,CF,concept,us-gaap:PaymentsToAcquirePropertyPlantAndEquipment,capex,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,CF,concept,us-gaap:NetCashProvidedByUsedInInvestingActivities,cfi,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,CF,concept,us-gaap:NetCashProvidedByUsedInInvestingActivitiesContinuingOperations,cfi,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,CF,concept,us-gaap:PaymentsOfDividends,dividends,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,CF,concept,us-gaap:PaymentsOfDividendsCommonStock,dividends,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,CF,concept,us-gaap:PaymentsForRepurchaseOfCommonStock,buybacks,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,CF,concept,us-gaap:NetCashProvidedByUsedInFinancingActivities,cff,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,CF,concept,us-gaap:NetCashProvidedByUsedInFinancingActivitiesContinuingOperations,cff,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,CF,concept,us-gaap:CashAndCashEquivalentsPeriodIncreaseDecrease,net_change_cash,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1
+AAPL,CF,concept,us-gaap:CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect,net_change_cash,0.95,[],accepted,rule:concept,FY2025 accession 0000320193-25-000079,,,,,,,,1

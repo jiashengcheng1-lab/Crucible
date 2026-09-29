@@ -1,0 +1,65 @@
+[IS] mapped 14 | missing 0 | unmapped labels 5
+  residual other_opex: 0.0% of base
+  residual other_income: 0.9% of base
+  residual nci_and_other: 0.0% of base
+  unmapped labels: Selling and Marketing Expense; Operating Expenses; Earnings Per Share, Basic; Weighted Average Number of Shares Outstanding, Basic; Common Stock, Dividends, Per Share, Declared
+  note: largest unmapped facts (latest FY, absorbed by residuals): ComprehensiveIncomeNetOfTax 113,611m; OperatingExpenses 62,151m; WeightedAverageNumberOfSharesOutstandingBasic 14,948m
+[BS] mapped 16 | missing 1 | unmapped labels 8
+  missing (filled with 0): goodwill
+  residual other_current_assets: 22.6% of base  <-- check
+  residual other_noncurrent_assets: 50.3% of base  <-- check
+  residual other_current_liabilities: 23.7% of base  <-- check
+  residual other_noncurrent_liabilities: 15.2% of base  <-- check
+  unmapped labels: Operating Lease, Right-of-Use Asset; Other Assets, Noncurrent; Retained Earnings (Accumulated Deficit); Accumulated Other Comprehensive Income (Loss), Net of Tax; Operating Lease, Liability, Current; Operating Lease, Liability, Noncurrent; Other Liabilities, Noncurrent; Long-term Debt, Excluding Current Maturities
+  note: largest unmapped facts (latest FY, absorbed by residuals): AssetsNoncurrent 211,284m; LiabilitiesNoncurrent 119,877m; LongTermDebt 90,700m; OtherAssetsNoncurrent 72,634m; NoncurrentAssets 49,834m; OtherLiabilitiesNoncurrent 41,549m; RetainedEarningsAccumulatedDeficit -14,264m; LongTermDebtCurrent 12,350m
+[CF] mapped 10 | missing 0 | unmapped labels 21
+  residual d_nwc: 6.0% of base
+  residual other_investing: 6.7% of base
+  residual net_debt_issuance: 4.2% of base
+  unmapped labels: Increase (Decrease) in Accounts Receivable; Increase (Decrease) in Inventories; Increase (Decrease) in Accounts Payable; Deferred Income Tax Expense (Benefit); Payments to Acquire Businesses, Net of Cash Acquired; Payments for (Proceeds from) Other Investing Activities; Payment, Tax Withholding, Share-based Payment Arrangement; Proceeds from (Payments for) Other Financing Activities; Repayments of Long-term Debt; Proceeds from Issuance of Common Stock; Cash, Cash Equivalents, Restricted Cash and Restricted Cash Equivalents; Interest Paid, Excluding Capitalized Interest, Operating Activities; Income Taxes Paid, Net; General and Administrative Expense; Income Tax Expense (Benefit); Nonoperating Income (Expense); Operating Expenses; Other Comprehensive Income (Loss), Reclassification Adjustment from AOCI on Derivatives, Net of Tax; Other Nonoperating Income (Expense); Proceeds from Issuance of Long-term Debt ...
+  note: largest unmapped facts (latest FY, absorbed by residuals): IncomeTaxesPaidNet 43,369m; ProceedsFromMaturitiesPrepaymentsAndCallsOfAvailableForSaleSecurities 40,907m; IncreaseDecreaseInOtherOperatingLiabilities -11,076m; RepaymentsOfLongTermDebt 10,932m; IncreaseDecreaseInOtherOperatingAssets 9,197m; Depreciation 8,000m; IncreaseDecreaseInAccountsReceivable 6,682m; PaymentsRelatedToTaxWithholdingForShareBasedCompensation 5,960m
+
+years: [2021, 2022, 2023, 2024, 2025] (USD millions)
+revenue: {2021: 365817.0, 2022: 394328.0, 2023: 383285.0, 2024: 391035.0, 2025: 416161.0}
+
+source per line:
+  revenue: facts: RevenueFromContractWithCustomerExcludingAssessedTax/Revenues/SalesRevenueNet
+  cogs: facts: CostOfGoodsAndServicesSold
+  gross_profit: facts: GrossProfit
+  sga: facts: SellingGeneralAndAdministrativeExpense
+  rnd: facts: ResearchAndDevelopmentExpense
+  operating_income: facts: OperatingIncomeLoss
+  interest_expense: facts: InterestExpense (+statement fill)
+  other_nonoperating: facts: OtherNonoperatingIncomeExpense (+statement fill)
+  nonoperating_total: facts: NonoperatingIncomeExpense
+  pretax_income: facts: IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest/IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments
+  income_tax: facts: IncomeTaxExpenseBenefit
+  net_income: facts: NetIncomeLoss
+  shares_diluted: facts: WeightedAverageNumberOfDilutedSharesOutstanding
+  eps_diluted: facts: EarningsPerShareDiluted
+  cash: facts: CashAndCashEquivalentsAtCarryingValue
+  receivables: facts: AccountsReceivableNetCurrent
+  inventory: facts: InventoryNet
+  total_current_assets: facts: AssetsCurrent
+  ppe_net: facts: PropertyPlantAndEquipmentNet (+statement fill)
+  total_assets: facts: Assets
+  payables: facts: AccountsPayableCurrent
+  short_term_debt: facts: CommercialPaper/CommercialPaper+LongTermDebtCurrent (+statement fill)
+  total_current_liabilities: facts: LiabilitiesCurrent
+  total_liabilities: facts: Liabilities
+  total_equity: facts: StockholdersEquity
+  total_liabilities_and_equity: facts: LiabilitiesAndStockholdersEquity
+  short_term_investments: facts: AvailableForSaleSecuritiesDebtSecuritiesCurrent/MarketableSecuritiesCurrent
+  goodwill: facts: Goodwill
+  intangibles: facts: IntangibleAssetsNetExcludingGoodwill
+  long_term_debt: facts: LongTermDebtNoncurrent
+  cf_net_income: facts: NetIncomeLoss
+  d_and_a: facts: DepreciationAndAmortization/DepreciationDepletionAndAmortization
+  sbc: facts: ShareBasedCompensation
+  cfo: facts: NetCashProvidedByUsedInOperatingActivities/NetCashProvidedByUsedInOperatingActivitiesContinuingOperations
+  capex: facts: PaymentsToAcquireProductiveAssets/PaymentsToAcquirePropertyPlantAndEquipment
+  cfi: facts: NetCashProvidedByUsedInInvestingActivities/NetCashProvidedByUsedInInvestingActivitiesContinuingOperations
+  dividends: facts: PaymentsOfDividends/PaymentsOfDividendsCommonStock (+statement fill)
+  buybacks: facts: PaymentsForRepurchaseOfCommonStock (+statement fill)
+  cff: facts: NetCashProvidedByUsedInFinancingActivities/NetCashProvidedByUsedInFinancingActivitiesContinuingOperations
+  net_change_cash: facts: CashAndCashEquivalentsPeriodIncreaseDecrease/CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect

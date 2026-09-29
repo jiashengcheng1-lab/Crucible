@@ -1,0 +1,186 @@
+{
+  "ticker": "AAPL",
+  "name": "Apple Inc.",
+  "cik": 320193,
+  "sic": "3571",
+  "industry": "Electronic Computers",
+  "fiscal_year_end": "0926",
+  "pulled_at": "2026-09-29T18:06:03+00:00",
+  "edgartools": "5.58.0",
+  "files": [
+    {
+      "file": "annual_is.csv",
+      "ok": true
+    },
+    {
+      "file": "annual_bs.csv",
+      "ok": true
+    },
+    {
+      "file": "annual_cf.csv",
+      "ok": true
+    },
+    {
+      "file": "quarterly_is.csv",
+      "ok": true
+    },
+    {
+      "file": "quarterly_bs.csv",
+      "ok": true
+    },
+    {
+      "file": "quarterly_cf.csv",
+      "ok": true
+    }
+  ],
+  "filings": [
+    {
+      "form": "10-Q",
+      "accession": "0000320193-26-000020",
+      "filing_date": "2026-07-31",
+      "period_of_report": "2026-06-27",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm"
+    },
+    {
+      "form": "10-Q",
+      "accession": "0000320193-26-000013",
+      "filing_date": "2026-05-01",
+      "period_of_report": "2026-03-28",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000013/aapl-20260328.htm"
+    },
+    {
+      "form": "10-Q",
+      "accession": "0000320193-26-000006",
+      "filing_date": "2026-01-30",
+      "period_of_report": "2025-12-27",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000006/aapl-20251227.htm"
+    },
+    {
+      "form": "10-K",
+      "accession": "0000320193-25-000079",
+      "filing_date": "2025-10-31",
+      "period_of_report": "2025-09-27",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm"
+    },
+    {
+      "form": "10-Q",
+      "accession": "0000320193-25-000073",
+      "filing_date": "2025-08-01",
+      "period_of_report": "2025-06-28",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000073/aapl-20250628.htm"
+    },
+    {
+      "form": "10-Q",
+      "accession": "0000320193-25-000057",
+      "filing_date": "2025-05-02",
+      "period_of_report": "2025-03-29",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000057/aapl-20250329.htm"
+    },
+    {
+      "form": "10-Q",
+      "accession": "0000320193-25-000008",
+      "filing_date": "2025-01-31",
+      "period_of_report": "2024-12-28",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000008/aapl-20241228.htm"
+    },
+    {
+      "form": "10-K",
+      "accession": "0000320193-24-000123",
+      "filing_date": "2024-11-01",
+      "period_of_report": "2024-09-28",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm"
+    },
+    {
+      "form": "10-Q",
+      "accession": "0000320193-24-000081",
+      "filing_date": "2024-08-02",
+      "period_of_report": "2024-06-29",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000081/aapl-20240629.htm"
+    },
+    {
+      "form": "10-Q",
+      "accession": "0000320193-24-000069",
+      "filing_date": "2024-05-03",
+      "period_of_report": "2024-03-30",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000069/aapl-20240330.htm"
+    },
+    {
+      "form": "10-Q",
+      "accession": "0000320193-24-000006",
+      "filing_date": "2024-02-02",
+      "period_of_report": "2023-12-30",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000006/aapl-20231230.htm"
+    },
+    {
+      "form": "10-K",
+      "accession": "0000320193-23-000106",
+      "filing_date": "2023-11-03",
+      "period_of_report": "2023-09-30",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/aapl-20230930.htm"
+    },
+    {
+      "form": "10-Q",
+      "accession": "0000320193-23-000077",
+      "filing_date": "2023-08-04",
+      "period_of_report": "2023-07-01",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000077/aapl-20230701.htm"
+    },
+    {
+      "form": "10-Q",
+      "accession": "0000320193-23-000064",
+      "filing_date": "2023-05-05",
+      "period_of_report": "2023-04-01",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000064/aapl-20230401.htm"
+    },
+    {
+      "form": "10-Q",
+      "accession": "0000320193-23-000006",
+      "filing_date": "2023-02-03",
+      "period_of_report": "2022-12-31",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000006/aapl-20221231.htm"
+    },
+    {
+      "form": "10-K",
+      "accession": "0000320193-22-000108",
+      "filing_date": "2022-10-28",
+      "period_of_report": "2022-09-24",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019322000108/aapl-20220924.htm"
+    },
+    {
+      "form": "10-Q",
+      "accession": "0000320193-22-000070",
+      "filing_date": "2022-07-29",
+      "period_of_report": "2022-06-25",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019322000070/aapl-20220625.htm"
+    },
+    {
+      "form": "10-Q",
+      "accession": "0000320193-22-000059",
+      "filing_date": "2022-04-29",
+      "period_of_report": "2022-03-26",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019322000059/aapl-20220326.htm"
+    },
+    {
+      "form": "10-Q",
+      "accession": "0000320193-22-000007",
+      "filing_date": "2022-01-28",
+      "period_of_report": "2021-12-25",
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019322000007/aapl-20211225.htm"
+    }
+  ],
+  "sources_by_fiscal_year": {
+    "2025": "10-K 0000320193-25-000079 filed 2025-10-31",
+    "2024": "10-K 0000320193-24-000123 filed 2024-11-01",
+    "2023": "10-K 0000320193-23-000106 filed 2023-11-03",
+    "2022": "10-K 0000320193-22-000108 filed 2022-10-28"
+  },
+  "tenk": {
+    "filing_date": "2025-10-31",
+    "period_of_report": "2025-09-27"
+  },
+  "facts_pit_rows": 25135,
+  "xbrl_facts_years": 7,
+  "xbrl_facts_quarters": 8,
+  "proxy": true,
+  "eightk_releases": 33
+}
